@@ -2,9 +2,9 @@
 #include <conio.h>
 using namespace std;
 
-const int M = 10, N = 10;
+const int M = 10, N = 10; //size of the array. M being number of rows, and N number of cols.
 
-void printPath(int path[M][N]) {
+void printPath(int path[M][N]) { //this function just prints the path.
 	cout << endl;
 	for (int i = 0; i < N; i++) {
 		for (int j = 0; j < M; j++) {
@@ -14,9 +14,7 @@ void printPath(int path[M][N]) {
 	}
 }
 
-
-
-void search(int arr[M][N], int m, int n, bool visited[M][N], int path[M][N]) {
+void search(int arr[M][N], int m, int n, bool visited[M][N], int path[M][N]) { //m and n are current row/col in the maze.
 	if (visited[m][n]) {
 		return;
 	}
@@ -45,9 +43,7 @@ void search(int arr[M][N], int m, int n, bool visited[M][N], int path[M][N]) {
 	}
 }
 
-
-
-void main() {
+void main() { //test input. Feel free to play with the input.
 	int arr[M][N] = { 
 	{ 1, 0, 1, 0, 1, 0, 0, 0, 1, 1 },
 	{ 1, 0, 0, 0, 1, 1, 1, 0, 1, 1 }, 
@@ -61,18 +57,18 @@ void main() {
 	{ 1, 0, 0, 0, 0, 0, 0, 0, 1, 1 }, };
 
 	bool visited[M][N];
-	for (int i = 0; i < N; i++) {
+	for (int i = 0; i < N; i++) { //initiallizing only.
 		for (int j = 0; j < M; j++) {
 			visited[i][j] = false;
 		}
 	}
 	int path[M][N];
-	for (int i = 0; i < N; i++) {
+	for (int i = 0; i < N; i++) { //initializing only
 		for (int j = 0; j < M; j++) {
 			path[i][j] = 0;
 		}
 	}
-	search(arr, 0, 0, visited, path);
+	search(arr, 0, 0, visited, path); //start state is (0,0)..
 }
 
 
