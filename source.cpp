@@ -15,22 +15,25 @@ void printPath(int path[M][N]) { //this function just prints the path.
 }
 
 void search(int arr[M][N], int m, int n, bool visited[M][N], int path[M][N]) { //m and n are current row/col in the maze.
-	if (visited[m][n]) {
+	if (arr[m][n] == 0) { //if current state has no path.
+		return;
+	}
+	if (visited[m][n]) { //if current state is already visited.
 		return;
 	}
 	else {
 		visited[m][n] = true;
 		path[m][n] = 1;
-		if (m + 1 < M && arr[m+1][n]==1) {
+		if (m + 1 < M && arr[m + 1][n] == 1) { //go down
 			search(arr, m + 1, n, visited, path);
 		}
-		if (n + 1 < N && arr[m][n+1]==1) {
+		if (n + 1 < N && arr[m][n + 1] == 1) { //go right
 			search(arr, m, n + 1, visited, path);
 		}
-		if (m - 1  >= 0 && arr[m-1][n] == 1) {
-			search(arr, m-1, n, visited, path);
+		if (m - 1 >= 0 && arr[m - 1][n] == 1) { //go up
+			search(arr, m - 1, n, visited, path);
 		}
-		if (n - 1 >=0 && arr[m][n - 1] == 1) {
+		if (n - 1 >= 0 && arr[m][n - 1] == 1) { //go left
 			search(arr, m, n - 1, visited, path);
 		}
 		if (m + 1 == M && n + 1 == N) {
@@ -39,22 +42,27 @@ void search(int arr[M][N], int m, int n, bool visited[M][N], int path[M][N]) { /
 			_getch();
 			return;
 		}
+		if (m == 0 && n == 0) {
+			cout << "NO SOLUTION POSSIBLE!";
+			_getch();
+			return;
+		}
 		path[m][n] = 0;
 	}
 }
 
 void main() { //test input. Feel free to play with the input.
-	int arr[M][N] = { 
-	{ 1, 0, 1, 0, 1, 0, 0, 0, 1, 1 },
-	{ 1, 0, 0, 0, 1, 1, 1, 0, 1, 1 }, 
-	{ 1, 1, 1, 0, 1, 0, 1, 0, 1, 1 }, 
-	{ 1, 0, 1, 0, 1, 0, 1, 0, 1, 1 }, 
-	{ 1, 0, 1, 0, 1, 0, 1, 1, 1, 1 }, 
-	{ 0, 0, 1, 1, 1, 1, 1, 0, 0, 1 }, 
-	{ 1, 1, 1, 0, 1, 0, 0, 0, 1, 1 }, 
-	{ 1, 0, 1, 0, 1, 0, 0, 1, 1, 0 }, 
-	{ 1, 0, 0, 0, 1, 1, 0, 0, 1, 0 }, 
-	{ 1, 0, 0, 0, 0, 0, 0, 0, 1, 1 }, };
+	int arr[M][N] = {
+		{ 1, 0, 1, 0, 1, 0, 0, 0, 1, 1 },
+		{ 1, 0, 0, 0, 1, 1, 1, 0, 1, 1 },
+		{ 1, 1, 1, 0, 1, 0, 1, 0, 1, 1 },
+		{ 1, 0, 1, 0, 1, 0, 1, 0, 1, 1 },
+		{ 1, 0, 1, 0, 1, 0, 1, 1, 1, 1 },
+		{ 0, 0, 1, 1, 1, 1, 1, 0, 0, 1 },
+		{ 1, 1, 1, 0, 1, 0, 0, 0, 1, 1 },
+		{ 1, 0, 1, 0, 1, 0, 0, 1, 1, 0 },
+		{ 1, 0, 0, 0, 1, 1, 0, 0, 1, 0 },
+		{ 1, 0, 0, 0, 0, 0, 0, 0, 1, 1 }, };
 
 	bool visited[M][N];
 	for (int i = 0; i < N; i++) { //initiallizing only.
@@ -70,6 +78,3 @@ void main() { //test input. Feel free to play with the input.
 	}
 	search(arr, 0, 0, visited, path); //start state is (0,0)..
 }
-
-
-
